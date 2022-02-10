@@ -36,13 +36,29 @@ namespace SnakeandLadder1
             {
                 case 0: Console.WriteLine("no play");
                     break;
-                case 1: Ladder1(roll);
+                case 1: 
+                    Ladder(roll);
                     break;
                 case 2:
-                    Sanke(roll);
+                    Snake(roll);
+                    break ;
+                    default: Console.WriteLine("Error!");
                     break ;
 
             }
+        }
+        private void Snake(int roll)
+        {
+            Console.WriteLine("Oops! Snake Trap!!!");
+            Console.WriteLine("Going down by " + roll);
+            position -= roll;
+        }
+
+        private void Ladder(int roll)
+        {
+            Console.WriteLine("Yay! A Ladder!!!");
+            Console.WriteLine("Going up by " + roll);
+            position += roll;
         }
     }
 }
