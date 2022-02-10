@@ -92,13 +92,29 @@ namespace SnakeandLadder1
             return CheckBoundary(displacement);
         }
 
-        public void PlayTillEnd()
+        public void PlayTillEnd(SnakeandLadderGame player2)
         {
-            while (wincheck is false)
-                RollDie();
-            Console.WriteLine("Congratulations You Won");
-            Console.WriteLine("Dice was rolled :" + totalDieRoll + "times");
+            while (this.wincheck is false && player2.wincheck is false)
+            {
+                {
+                    Console.WriteLine("\nPlayer 1 turn: ");
+                    this.RollDie();
+                    this.Derive();
+                    if (this.wincheck is true)
+                        break;
+                    Console.WriteLine("\nPlayer 2 turn: ");
+                    player2.RollDie();
+                    player2.Derive();
+                }
+                if (player2.wincheck is true)
+                    Console.WriteLine("Congratulations Player 2  Won");
+                else
+                    Console.WriteLine("Congratulations Player 1  Won!!");
+                Console.WriteLine("Player 1 Total die rolls: " + this.totalDieRoll);
+                Console.WriteLine("Player 2 Total die rolls: " + player2.totalDieRoll);
+            }
         }
-
-    }
+                
+        }
 }
+
