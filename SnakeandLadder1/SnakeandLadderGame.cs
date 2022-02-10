@@ -8,12 +8,15 @@ namespace SnakeandLadder1
 {
     internal class SnakeandLadderGame
     {
-        int position;
+       private int position;
+        private bool wincheck;
+        private int totalDieRoll;
         Random random=new Random();
 
         public SnakeandLadderGame()
         {
             position = 0;
+            wincheck = false;
         }
         public void Derive()
         {
@@ -49,16 +52,53 @@ namespace SnakeandLadder1
         }
         private void Snake(int roll)
         {
-            Console.WriteLine("Oops! Snake Trap!!!");
+            Console.WriteLine(" Snake bite!!!");
             Console.WriteLine("Going down by " + roll);
             position -= roll;
         }
 
         private void Ladder(int roll)
         {
-            Console.WriteLine("Yay! A Ladder!!!");
+            Console.WriteLine(" A Ladder!!!");
             Console.WriteLine("Going up by " + roll);
             position += roll;
         }
+
+        private int CheckBoundary(int displacement)
+        {
+            if (position < 0)
+            {
+                position = 0;
+                return 0;
+            }
+            else if (position > 100)
+            {
+                position -= displacement;
+                Console.WriteLine(" You shot past position 100");
+                Console.WriteLine("You are moved back to previous position");
+                return 0;
+            }
+            else
+                return 1;
+        }
+        private int MovePlayer(int displacement)
+        {
+            position += displacement;
+            if (position == 100)
+            {
+                wincheck = true;
+                return 0;
+            }
+            return CheckBoundary(displacement);
+        }
+
+        public void PlayTillEnd()
+        {
+            while (wincheck is false)
+                RollDie();
+            Console.WriteLine("Congratulations You Won");
+            Console.WriteLine("Dice was rolled :" + totalDieRoll + "times");
+        }
+
     }
 }
